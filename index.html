@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-contrast="normal" data-fontscale="1">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noir Collection - High Performance & Executive</title>
+    <!-- Fuentes elegantes de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Enlace a tu archivo CSS externo -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            Noir
+            <span>collection</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#catalogo">Catálogo</a></li>
+                <li><a href="#cita">Agendar Cita</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="hero-content">
+                <h1>Maneja Diferente</h1>
+                <p>Descubre lo último en tecnología automotriz con nuestra amplia gama de vehículos. Diseñados para quienes buscan elegancia y eficiencia.</p>
+                <a href="#catalogo" class="btn btn-outline">EXPLORAR COLLECTION</a>
+            </div>
+        </section>
+
+        <section id="catalogo" class="collection">
+            <div class="filters">
+                <button class="btn-filter active" data-filter="all">Todos</button>
+                <button class="btn-filter" data-filter="executive">Executive</button>
+                <button class="btn-filter" data-filter="performance">High Performance</button>
+            </div>
+
+            <div class="grid-coches" id="galeria-coches">
+                <div class="card" data-category="executive">
+                    <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&q=80&w=800" alt="Mercedes-Benz Clase E">
+                    <div class="card-content">
+                        <h3>The Authority</h3>
+                        <p>Sedán Ejecutivo de Lujo</p>
+                        <button class="btn btn-solid btn-detalles" data-car-id="authority">Ver Detalles</button>
+                    </div>
+                </div>
+
+                <div class="card" data-category="performance">
+                    <img src="https://pictures.porsche.com/rtt/iris?COSY-EU-100-1711coMvsi60AAt5FwcmBEgA4qP8iBUDxPE3Cb9pNXABuN9dMGF4tl3U0%25z8rMbjUuWgRcgVGPK0rh4mctLsR6EXdGvdTmJKlEnDzCBLMkYCIFF7gKpGl3UklQDcFGHTMYnfurMt95yPewH8DCvNzxKN7GXVD2UxLODmLRXf95sY4wq5Z6WyosUv1D9" alt="Porsche 911 GT3">
+                    <div class="card-content">
+                        <h3>The Phantom</h3>
+                        <p>Deportivo de Alto Rendimiento</p>
+                        <button class="btn btn-solid btn-detalles" data-car-id="phantom">Ver Detalles</button>
+                    </div>
+                </div>
+
+                <div class="card" data-category="performance">
+                    <img src="https://images.unsplash.com/photo-1600712242805-5f78671b24da?auto=format&fit=crop&q=80&w=800" alt="BMW M3 Competition">
+                    <div class="card-content">
+                        <h3>The Panter</h3>
+                        <p>High Performance</p>
+                        <button class="btn btn-solid btn-detalles" data-car-id="panter">Ver Detalles</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ventana flotante (modal) con la ficha técnica del vehículo -->
+        <div class="modal-overlay" id="modal-overlay" hidden>
+            <div class="modal-coche" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" id="modal-coche">
+                <button type="button" class="modal-cerrar" id="modal-cerrar" aria-label="Cerrar ficha del vehículo">✕</button>
+
+                <img id="modal-imagen" class="modal-imagen" src="" alt="">
+
+                <div class="modal-cuerpo">
+                    <p class="modal-categoria" id="modal-categoria">—</p>
+                    <h3 id="modal-titulo">—</h3>
+                    <p class="modal-precio" id="modal-precio">—</p>
+
+                    <p class="modal-descripcion" id="modal-descripcion">—</p>
+
+                    <dl class="modal-specs" id="modal-specs"></dl>
+
+                    <div class="modal-colores">
+                        <span class="modal-colores-label">Colores disponibles</span>
+                        <p id="modal-colores">—</p>
+                    </div>
+
+                    <div class="modal-acciones">
+                        <button type="button" class="btn btn-outline" id="modal-btn-cerrar">Seguir viendo</button>
+                        <button type="button" class="btn btn-solid btn-accion-principal" id="modal-btn-agendar">Agendar Cita para este Auto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="cita" class="cita">
+            <div class="form-container">
+                <h2>SOLICITUD EXPERTA</h2>
+                <p class="subtitle">Déjanos tus datos para agendar una consultoría personalizada sobre tu diseño.</p>
+
+                <!-- Aviso de borrador guardado -->
+                <div id="aviso-borrador" class="draft-banner" role="status" hidden>
+                    <span>Encontramos un borrador guardado de una reserva anterior.</span>
+                    <div class="draft-banner-actions">
+                        <button type="button" id="btn-restaurar" class="btn-link">Restaurar</button>
+                        <button type="button" id="btn-descartar" class="btn-link">Descartar</button>
+                    </div>
+                </div>
+
+                <!-- Indicador de progreso: Paso X de 3 -->
+                <div class="progreso" aria-hidden="false">
+                    <p class="paso-texto" id="paso-texto">Paso 1 de 3</p>
+                    <div class="progreso-barra">
+                        <div class="progreso-barra-relleno" id="progreso-relleno" style="width: 33.33%;"></div>
+                    </div>
+                    <ol class="progreso-etiquetas">
+                        <li data-step="1" class="activo">Tus datos</li>
+                        <li data-step="2">Fecha y hora</li>
+                        <li data-step="3">Confirmar</li>
+                    </ol>
+                </div>
+
+                <form id="formulario-cita" novalidate>
+
+                    <p class="interes-nota" id="interes-nota" hidden>Cita para: <strong id="interes-auto-nombre"></strong></p>
+                    <input type="hidden" id="interes-auto" name="interes-auto" value="">
+
+                    <!-- PASO 1: Datos personales -->
+                    <fieldset class="form-step" data-step="1">
+                        <legend class="visually-hidden">Paso 1 de 3: Tus datos</legend>
+
+                        <div class="form-group">
+                            <label for="nombre">NOMBRE COMPLETO</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Ej. Carlos Mendoza" autocomplete="name" required>
+                            <p class="error-msg" id="error-nombre" role="alert"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="correo">CORREO ELECTRÓNICO</label>
+                            <input type="email" id="correo" name="correo" placeholder="carlos@ejemplo.com" autocomplete="email" required>
+                            <p class="error-msg" id="error-correo" role="alert"></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">TELÉFONO</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="+57 300 000 0000" autocomplete="tel" required>
+                            <p class="error-msg" id="error-telefono" role="alert"></p>
+                        </div>
+                    </fieldset>
+
+                    <!-- PASO 2: Fecha y hora -->
+                    <fieldset class="form-step" data-step="2" hidden>
+                        <legend class="visually-hidden">Paso 2 de 3: Fecha y hora</legend>
+
+                        <div class="form-group row">
+                            <div class="col">
+                                <label for="fecha">FECHA</label>
+                                <input type="date" id="fecha" name="fecha" required>
+                                <p class="error-msg" id="error-fecha" role="alert"></p>
+                            </div>
+                            <div class="col">
+                                <label for="hora">HORA (APROX)</label>
+                                <input type="time" id="hora" name="hora" required>
+                                <p class="error-msg" id="error-hora" role="alert"></p>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- PASO 3: Confirmación -->
+                    <fieldset class="form-step" data-step="3" hidden>
+                        <legend class="visually-hidden">Paso 3 de 3: Confirmar</legend>
+
+                        <p class="resumen-intro">Revisa que todo esté correcto antes de confirmar tu cita.</p>
+                        <dl class="resumen-lista">
+                            <div class="resumen-item"><dt>Nombre</dt><dd id="resumen-nombre">—</dd></div>
+                            <div class="resumen-item"><dt>Correo</dt><dd id="resumen-correo">—</dd></div>
+                            <div class="resumen-item"><dt>Teléfono</dt><dd id="resumen-telefono">—</dd></div>
+                            <div class="resumen-item"><dt>Fecha</dt><dd id="resumen-fecha">—</dd></div>
+                            <div class="resumen-item"><dt>Hora</dt><dd id="resumen-hora">—</dd></div>
+                        </dl>
+                    </fieldset>
+
+                    <p class="autosave-nota" id="autosave-nota" aria-live="polite">&nbsp;</p>
+
+                    <!-- Barra de acciones, siempre accesible y con botones grandes -->
+                    <div class="acciones-form">
+                        <button type="button" id="btn-anterior" class="btn btn-outline" hidden>Anterior</button>
+                        <button type="button" id="btn-siguiente" class="btn btn-solid btn-accion-principal">Siguiente</button>
+                        <button type="submit" id="btn-confirmar" class="btn btn-solid full-width" hidden>CONFIRMAR CITA</button>
+                    </div>
+
+                    <div id="exito" class="success-msg" role="status">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span>¡CITA AGENDADA CON ÉXITO!</span>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Copyright 2026 - All rights reserved</p>
+    </footer>
+
+    <!-- Panel de accesibilidad: flexibilidad visual, siempre en zona inferior para uso táctil -->
+    <div class="panel-accesibilidad" role="region" aria-label="Preferencias de visualización">
+        <button type="button" class="btn-accesibilidad" id="btn-texto-menos" aria-label="Reducir tamaño de letra">A−</button>
+        <button type="button" class="btn-accesibilidad" id="btn-texto-mas" aria-label="Aumentar tamaño de letra">A+</button>
+        <button type="button" class="btn-accesibilidad" id="btn-contraste" aria-pressed="false" aria-label="Activar modo de alto contraste">
+            <span aria-hidden="true">◐</span>
+        </button>
+        <button type="button" class="btn-accesibilidad" id="btn-tema" aria-pressed="false" aria-label="Cambiar a modo claro">
+            <span aria-hidden="true">☾</span>
+        </button>
+    </div>
+
+    <script src="agenda.js" defer></script>
+    <script src="script.js" defer></script>
+</body>
+</html>

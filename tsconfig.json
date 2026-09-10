@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    // Cambia "nodenext" por "ESNext" o "Preserve"
+    "module": "ESNext",
+    "target": "es2020",
+    "types": [],
+
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    "strict": true,
+    "jsx": "react-jsx",
+    
+    // Desactiva o quita estas opciones para evitar la inyección de módulos
+    "verbatimModuleSyntax": false,
+    "isolatedModules": false,
+    "moduleDetection": "legacy",
+    "skipLibCheck": true
+  }
+}
