@@ -3,7 +3,6 @@
 async function enviarCitaAlBackend(evento: Event): Promise<void> {
   evento.preventDefault(); // Detiene el comportamiento por defecto del formulario
 
-  // Captura los datos ingresados en tu HTML
   const datosCita = {
     nombre: (document.getElementById("nombre") as HTMLInputElement)?.value,
     correo: (document.getElementById("correo") as HTMLInputElement)?.value,
@@ -39,7 +38,6 @@ async function enviarCitaAlBackend(evento: Event): Promise<void> {
   }
 }
 
-// Escucha el evento submit del formulario cuando cargue el DOM
 document.addEventListener("DOMContentLoaded", () => {
   const formulario = document.getElementById("formulario-cita") as HTMLFormElement;
   if (formulario) {
