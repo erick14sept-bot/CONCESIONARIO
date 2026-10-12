@@ -1,24 +1,22 @@
 {
   "compilerOptions": {
-    // Cambia "nodenext" por "ESNext" o "Preserve"
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "target": "es2020",
-    "types": [],
+    "skipLibCheck": true,
 
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
 
     "strict": true,
-    "jsx": "react-jsx",
-    
-    // Desactiva o quita estas opciones para evitar la inyección de módulos
-    "verbatimModuleSyntax": false,
-    "isolatedModules": false,
-    "moduleDetection": "legacy",
-    "skipLibCheck": true
-  }
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"]
 }
