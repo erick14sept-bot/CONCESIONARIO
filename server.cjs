@@ -10,12 +10,11 @@ app.use(cors());
 const KEYFILEPATH = path.join(__dirname, 'credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/calendar.events'];
 
+// Configuración global de GoogleAuth
 const auth = new google.auth.GoogleAuth({
   keyFile: KEYFILEPATH,
   scopes: SCOPES,
 });
-
-const calendar = google.calendar({ version: 'v3', auth });
 
 const CALENDAR_ID = 'erick14sept@gmail.com';
 
@@ -26,6 +25,10 @@ app.post('/api/agendar-cita', async (req, res) => {
     if (!fecha || !hora) {
       return res.status(400).json({ error: 'La fecha y la hora son obligatorias.' });
     }
+
+    // Obtenemos explícitamente el cliente autenticado antes de consultar la API
+    const authClient = await auth.getClient();
+    const calendar = google.calendar({ version: 'v3', auth: authClient });
 
     const inicioStr = `${fecha}T${hora}:00`;
     
@@ -48,7 +51,6 @@ app.post('/api/agendar-cita', async (req, res) => {
         dateTime: finStr, 
         timeZone: 'America/Bogota' 
       }
-
     };
 
     const respuesta = await calendar.events.insert({

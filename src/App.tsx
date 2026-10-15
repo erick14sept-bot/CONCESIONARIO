@@ -61,23 +61,22 @@ export default function App() {
   const [autoModal, setAutoModal] = useState<Auto | null>(null);
   const [autoInteres, setAutoInteres] = useState<string>('');
 
-  // Tema 3 y 4: Estados para métricas e indicadores del sistema
+  // Tema 3 y 4: Opciones de personalización y accesorios cotizados por el cliente
   const [indicators, setIndicators] = useState<Indicator[]>([
-    { id: 1, metric: 'Comprensibilidad de Datos', value: '88%', status: 'Óptimo' },
-    { id: 2, metric: 'Precisión del Modelo XAI', value: '94.2%', status: 'Alto' },
-    { id: 3, metric: 'Tiempo de Respuesta REST', value: '120 ms', status: 'Óptimo' },
-    { id: 4, metric: 'Tasa de Error', value: '1.2%', status: 'Medio' }
+    { id: 1, metric: 'Polarizado Cerámico HD', value: '$850.000 COP', status: 'Óptimo' },
+    { id: 2, metric: 'Rines Forjados 20"', value: '$4.200.000 COP', status: 'Alto' },
+    { id: 3, metric: 'Tratamiento Cerámico de Pintura', value: '$1.500.000 COP', status: 'Óptimo' },
+    { id: 4, metric: 'Sistema de Escape Deportivo', value: '$6.800.000 COP', status: 'Medio' }
   ]);
   const [cargandoApi, setCargandoApi] = useState(false);
   const [errorApi, setErrorApi] = useState<string | null>(null);
 
-  // Tema 4: useEffect para monitoreo inicial
   useEffect(() => {
-    console.log('Componente montado: listo para peticiones HTTP.');
+    console.log('Módulo de Personalización VIP listo.');
   }, []);
 
-  const autosFiltrados = filtro === 'all'
-    ? AUTOS_DATA
+  const autosFiltrados = filtro === 'all' 
+    ? AUTOS_DATA 
     : AUTOS_DATA.filter(a => a.categoriaFiltro === filtro);
 
   const handleAgendarDesdeModal = (nombreAuto: string) => {
@@ -86,12 +85,11 @@ export default function App() {
     document.getElementById('cita')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Función para agregar nuevos indicadores desde el formulario (Tema 3)
   const agregarIndicador = (nuevo: Indicator) => {
     setIndicators([nuevo, ...indicators]);
   };
 
-  // Tema 4: Consumo real de API mediante fetch y manejo de errores
+  // Tema 4: Consumo de API externa para consultar catálogo internacional de accesorios
   const consumirApiExterna = async () => {
     setCargandoApi(true);
     setErrorApi(null);
@@ -102,16 +100,16 @@ export default function App() {
       }
       const datos = await respuesta.json();
 
-      const indicadorRemoto: Indicator = {
+      const nuevoAccesorio: Indicator = {
         id: Date.now(),
-        metric: datos.title ? datos.title.substring(0, 25) + '...' : 'Dato API Externa',
-        value: `$${datos.price || '100'}`,
+        metric: datos.title ? `Accesorio VIP: ${datos.title.substring(0, 20)}...` : 'Accesorio Importado',
+        value: `$${datos.price || '120'} USD`,
         status: 'Óptimo'
       };
 
-      setIndicators((prev) => [indicadorRemoto, ...prev]);
+      setIndicators((prev) => [nuevoAccesorio, ...prev]);
     } catch (err) {
-      setErrorApi('No se pudo conectar con la API externa. Verifique su red.');
+      setErrorApi('No se pudo consultar el catálogo remoto. Verifique su conexión.');
     } finally {
       setCargandoApi(false);
     }
@@ -124,7 +122,7 @@ export default function App() {
         <nav>
           <ul>
             <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#monitoreo">Monitoreo</a></li>
+            <li><a href="#personalizacion">Personalización VIP</a></li>
             <li><a href="#catalogo">Catálogo</a></li>
             <li><a href="#cita">Agendar Cita</a></li>
           </ul>
@@ -140,12 +138,12 @@ export default function App() {
           </div>
         </section>
 
-        {/* Sección de Monitoreo e Indicadores (Temas 3 y 4) */}
-        <section id="monitoreo" style={{ padding: '2rem', maxWidth: '900px', margin: '0 auto' }}>
+        {/* Sección de Cotizador y Personalización VIP (Temas 3 y 4) */}
+        <section id="personalizacion" style={{ padding: '2rem', maxWidth: '900px', margin: '0 auto' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', borderBottom: '1px solid #334155', paddingBottom: '1rem' }}>
             <div>
-              <h2 style={{ color: '#38bdf8', margin: 0 }}>Plataforma de Analítica Predictiva</h2>
-              <p style={{ color: '#94a3b8', margin: '0.2rem 0 0 0', fontSize: '0.9rem' }}>Módulo de Monitoreo con Consumo de API (Tema 4)</p>
+              <h2 style={{ color: '#38bdf8', margin: 0 }}>Cotizador de Personalización y Accesorios VIP</h2>
+              <p style={{ color: '#94a3b8', margin: '0.2rem 0 0 0', fontSize: '0.9rem' }}>Simula y agrega paquetes exclusivos para tu nuevo vehículo</p>
             </div>
             <button
               onClick={consumirApiExterna}
@@ -160,11 +158,10 @@ export default function App() {
                 cursor: cargandoApi ? 'not-allowed' : 'pointer'
               }}
             >
-              {cargandoApi ? 'Consultando API...' : 'Consumir API Real'}
+              {cargandoApi ? 'Consultando...' : 'Consultar Catálogo Importado'}
             </button>
           </div>
 
-          {/* Manejo de errores de red */}
           {errorApi && (
             <div style={{ background: '#7f1d1d', border: '1px solid #991b1b', padding: '0.8rem', borderRadius: '6px', marginBottom: '1.5rem', color: '#fca5a5' }}>
               {errorApi}
@@ -174,9 +171,9 @@ export default function App() {
           {/* Formulario Controlado (Tema 3) */}
           <FormularioMetrica onAgregarMetrica={agregarIndicador} />
 
-          {/* Sección de Indicadores del Sistema */}
+          {/* Tarjetas Dinámicas de Accesorios Cotizados */}
           <div style={{ marginBottom: '2rem' }}>
-            <h3 style={{ color: '#fff' }}>Indicadores del Sistema ({indicators.length})</h3>
+            <h3 style={{ color: '#fff' }}>Opciones y Accesorios Cotizados ({indicators.length})</h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '1rem' }}>
               {indicators.map((item) => (
                 <TarjetaItem
@@ -199,19 +196,19 @@ export default function App() {
 
           <div className="grid-coches">
             {autosFiltrados.map(auto => (
-              <CardAuto
-                key={auto.id}
-                auto={auto}
-                onVerDetalles={(id) => setAutoModal(AUTOS_DATA.find(a => a.id === id) || null)}
+              <CardAuto 
+                key={auto.id} 
+                auto={auto} 
+                onVerDetalles={(id) => setAutoModal(AUTOS_DATA.find(a => a.id === id) || null)} 
               />
             ))}
           </div>
         </section>
 
-        <ModalDetalles
-          auto={autoModal}
-          onClose={() => setAutoModal(null)}
-          onAgendar={handleAgendarDesdeModal}
+        <ModalDetalles 
+          auto={autoModal} 
+          onClose={() => setAutoModal(null)} 
+          onAgendar={handleAgendarDesdeModal} 
         />
 
         <section id="cita" className="cita">

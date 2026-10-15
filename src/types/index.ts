@@ -52,7 +52,7 @@ export interface CitaFormData {
   autoInteres?: string;
 }
 
-// Tema 3 & 4: Interfaz para las métricas e indicadores del dashboard
+// Tema 3 & 4: Interfaz para los accesorios y servicios personalizados del cliente
 export interface Indicator {
   id: number;
   metric: string;

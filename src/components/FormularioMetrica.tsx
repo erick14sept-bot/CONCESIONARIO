@@ -38,7 +38,7 @@ export const FormularioMetrica = ({ onAgregarMetrica }: FormularioProps) => {
       }}
     >
       <h3 style={{ color: '#38bdf8', marginTop: 0, fontSize: '1.1rem' }}>
-        Registrar Nuevo Indicador (Tema 3)
+        Personalizar / Cotizar Accesorio VIP
       </h3>
       <div
         style={{
@@ -57,13 +57,13 @@ export const FormularioMetrica = ({ onAgregarMetrica }: FormularioProps) => {
               marginBottom: '0.3rem',
             }}
           >
-            Métrica:
+            Accesorio / Servicio:
           </label>
           <input
             type="text"
             value={metric}
             onChange={(e) => setMetric(e.target.value)}
-            placeholder="Ej: Rendimiento de Red"
+            placeholder="Ej: Rines Forjados 20 pulgadas"
             style={{
               width: '100%',
               padding: '0.5rem',
@@ -83,13 +83,13 @@ export const FormularioMetrica = ({ onAgregarMetrica }: FormularioProps) => {
               marginBottom: '0.3rem',
             }}
           >
-            Valor:
+            Presupuesto / Valor:
           </label>
           <input
             type="text"
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            placeholder="Ej: 98 ms"
+            placeholder="Ej: $4.200.000 COP"
             style={{
               width: '100%',
               padding: '0.5rem',
@@ -109,7 +109,7 @@ export const FormularioMetrica = ({ onAgregarMetrica }: FormularioProps) => {
               marginBottom: '0.3rem',
             }}
           >
-            Estado:
+            Disponibilidad / Nivel:
           </label>
           <select
             value={status}
@@ -123,9 +123,9 @@ export const FormularioMetrica = ({ onAgregarMetrica }: FormularioProps) => {
               borderRadius: '4px',
             }}
           >
-            <option value="Óptimo">Óptimo</option>
-            <option value="Alto">Alto</option>
-            <option value="Medio">Medio</option>
+            <option value="Óptimo">Óptimo (Inmediata)</option>
+            <option value="Alto">Alto (Bajo Pedido)</option>
+            <option value="Medio">Medio (Edición Limitada)</option>
           </select>
         </div>
         <button

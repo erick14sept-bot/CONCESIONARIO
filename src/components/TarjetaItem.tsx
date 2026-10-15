@@ -34,7 +34,7 @@ export const TarjetaItem = ({ metric, value, status }: TarjetaItemProps) => {
       }}
     >
       <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>{metric}</span>
-      <h3 style={{ fontSize: '1.4rem', margin: 0, color: '#fff' }}>{value}</h3>
+      <h3 style={{ fontSize: '1.3rem', margin: 0, color: '#fff' }}>{value}</h3>
       <span
         style={{
           alignSelf: 'flex-start',
@@ -46,7 +46,7 @@ export const TarjetaItem = ({ metric, value, status }: TarjetaItemProps) => {
           backgroundColor: getStatusColor(status),
         }}
       >
-        {status}
+        {status === 'Óptimo' ? 'Stock Inmediato' : status === 'Alto' ? 'Bajo Pedido' : 'Edición VIP'}
       </span>
     </div>
   );
