@@ -52,10 +52,12 @@ export interface CitaFormData {
   autoInteres?: string;
 }
 
-// Tema 3 & 4: Interfaz para los accesorios y servicios personalizados del cliente
-export interface Indicator {
+// Tema 3 & 4: Interfaz para las simulaciones de crédito del cliente
+export interface SimulacionCredito {
   id: number;
-  metric: string;
-  value: string;
-  status: 'Óptimo' | 'Alto' | 'Medio';
+  vehiculo: string;
+  montoTotal: number;
+  cuotaInicial: number;
+  plazoMeses: number;
+  cuotaMensual: number;
 }
